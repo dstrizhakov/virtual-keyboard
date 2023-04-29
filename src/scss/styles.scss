@@ -2,9 +2,11 @@
 @import '../../node_modules/normalize.css/normalize';
 
 .content {
+  width: 750px;
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
   &__title {
+    width: 100%;
     margin: 0 auto;
     padding: 10px;
     font-size: 32px;
@@ -13,22 +15,29 @@
     text-align: center;
   }
   &__textarea {
+    width: 100%;
+    border: 2px solid teal;
+    border-radius: 5px;
   }
   &__keyboard {
-    width: 710px;
+    width: 100%;
     margin: 0 auto;
     padding: 10px;
+    padding-bottom: 0;
     background: aliceblue;
-    border: 3px solid #10272b;
+    border: 2px solid teal;
     border-radius: 5px;
+  }
+  &__info {
+    width: 100%;
+    text-align: center;
   }
 }
 
 .textarea {
   display: block;
-  width: 700px;
   height: 200px;
-  margin: 10px auto 10px;
+  margin: 10px auto;
   padding: 10px;
   font-size: 18px;
   color: #10272b;
@@ -40,7 +49,7 @@
     justify-content: space-between;
     width: 100%;
     height: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
   &__key {
     cursor: pointer;
@@ -49,6 +58,7 @@
     margin-left: 6px;
     line-height: 40px;
     font-weight: 700;
+    font-size: 13px;
     text-align: center;
     color: white;
     background: teal;
@@ -56,8 +66,47 @@
     box-shadow: 2px 2px 2px 1px #10272b;
     transition: all 0.3s ease 0s;
   }
-}
 
-.space {
-  width: 330px;
+  .tab {
+    width: 70px;
+  }
+
+  .delete {
+    width: 50px;
+  }
+
+  .space {
+    width: 380px;
+  }
+
+  .backspace,
+  .capsLock,
+  .shiftLeft {
+    width: 100px;
+  }
+
+  .enter,
+  .shiftRight {
+    width: 108px;
+  }
+
+  .altLeft,
+  .altRight,
+  .arrowUp,
+  .arrowLeft,
+  .arrowDown,
+  .arrowRight,
+  .backspace,
+  .capsLock,
+  .controlLeft,
+  .controlRight,
+  .delete,
+  .enter,
+  .shiftLeft,
+  .shiftRight,
+  .tab,
+  .metaLeft {
+    font-weight: 600;
+    background-color: rgb(0, 73, 73);
+  }
 }
