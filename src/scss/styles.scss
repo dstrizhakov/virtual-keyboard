@@ -23,7 +23,6 @@
     width: 100%;
     margin: 0 auto;
     padding: 10px;
-    padding-bottom: 0;
     background: aliceblue;
     border: 2px solid teal;
     border-radius: 5px;
@@ -36,7 +35,7 @@
 
 .textarea {
   display: block;
-  height: 200px;
+  height: 150px;
   margin: 10px auto;
   padding: 10px;
   font-size: 18px;
@@ -65,48 +64,115 @@
     border-radius: 4px;
     box-shadow: 2px 2px 2px 1px #10272b;
     transition: all 0.3s ease 0s;
+    &:hover {
+      background: rgba(37, 129, 0, 0.7);
+    }
+    &.active {
+      background-color: rgb(53, 185, 0);
+      box-shadow: 0px 0px 0px 0px #222222;
+    }
   }
+}
 
-  .tab {
-    width: 70px;
-  }
+.altLeft,
+.altRight,
+.arrowUp,
+.arrowLeft,
+.arrowDown,
+.arrowRight,
+.backspace,
+.capsLock,
+.controlLeft,
+.controlRight,
+.delete,
+.enter,
+.shiftLeft,
+.shiftRight,
+.tab,
+.metaLeft {
+  font-weight: 600;
+  background-color: rgb(0, 73, 73);
+}
+//==================================================================
+.centralizer {
+  width: 750px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+}
+.title {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: teal;
+  text-align: center;
+}
 
-  .delete {
-    width: 50px;
-  }
+.textarea {
+  width: 100%;
+  border: 2px solid teal;
+  border-radius: 5px;
+  display: block;
+  height: 150px;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 18px;
+  color: #10272b;
+}
+.hidden {
+  display: none;
+}
 
-  .space {
-    width: 380px;
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 6px;
+}
+.key {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  margin-left: 6px;
+  line-height: 40px;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  color: white;
+  background: teal;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px 1px #10272b;
+  transition: all 0.3s ease 0s;
+  &:hover {
+    background: rgba(37, 129, 0, 0.7);
   }
+  &.active {
+    background-color: rgb(53, 185, 0);
+    box-shadow: 0px 0px 0px 0px #222222;
+  }
+}
 
-  .backspace,
-  .capsLock,
-  .shiftLeft {
-    width: 100px;
-  }
+.Backspace,
+.CapsLock,
+.ShiftLeft {
+  width: 100px;
+}
 
-  .enter,
-  .shiftRight {
-    width: 108px;
-  }
+.Tab {
+  width: 70px;
+}
 
-  .altLeft,
-  .altRight,
-  .arrowUp,
-  .arrowLeft,
-  .arrowDown,
-  .arrowRight,
-  .backspace,
-  .capsLock,
-  .controlLeft,
-  .controlRight,
-  .delete,
-  .enter,
-  .shiftLeft,
-  .shiftRight,
-  .tab,
-  .metaLeft {
-    font-weight: 600;
-    background-color: rgb(0, 73, 73);
-  }
+.Delete {
+  width: 50px;
+}
+
+.Space {
+  width: 380px;
+}
+
+.Enter,
+.ShiftRight {
+  width: 108px;
 }

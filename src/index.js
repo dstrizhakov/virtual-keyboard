@@ -35,7 +35,7 @@ document.body.append(content);
 content.append(title, textarea, keyboard, info);
 title.textContent = 'Virtual Keyboard';
 keyboard.append(row1, row2, row3, row4, row5);
-info.innerText = 'To change the language press shift + ctrl';
+info.innerText = 'Для переключения языка комбинация: левыe ctrl + alt';
 
 function addKeys(keysInRow, row, keyArr) {
   for (let i = 0; i < keysInRow; i += 1) {
@@ -78,3 +78,10 @@ document.querySelector('.keyboard > .row5 > div:nth-child(6)').classList.add('ar
 document.querySelector('.keyboard > .row5 > div:nth-child(8)').classList.add('arrowRight');
 document.querySelector('.keyboard > .row4 > div:nth-child(12)').classList.add('arrowUp');
 document.querySelector('.keyboard > .row5 > div:nth-child(7)').classList.add('arrowDown');
+
+function defaultActions(event) {
+  event.preventDefault();
+  return false;
+}
+
+document.addEventListener('keydown', defaultActions);
