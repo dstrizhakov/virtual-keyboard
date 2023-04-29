@@ -1,3 +1,9 @@
+import constants from './modules/keyboards.js';
+
+/* DOM generator */
+
+const { lowerEnglishArr } = constants;
+
 const content = document.createElement('div');
 const title = document.createElement('p');
 const textarea = document.createElement('textarea');
@@ -32,3 +38,27 @@ content.append(title, textarea, keyboard, info);
 title.textContent = 'Virtual Keyboard';
 keyboard.append(row1, row2, row3, row4, row5);
 info.innerText = 'To change the language press shift + ctrl';
+
+function addKeys(keysInRows, whichRow, whichArr) {
+  for (let i = 0; i < keysInRows; i += 1) {
+    const key = document.createElement('div');
+    key.classList.add('keyboard__key', 'key');
+
+    const keyEng = document.createElement('span');
+    keyEng.classList.add('eng');
+
+    const caseDown = document.createElement('span');
+    caseDown.classList.add('caseDown');
+    caseDown.textContent = lowerEnglishArr[whichArr][i];
+
+    keyEng.append(caseDown);
+    key.append(keyEng);
+    whichRow.append(key);
+  }
+}
+
+addKeys(14, row1, 0);
+addKeys(15, row2, 1);
+addKeys(13, row3, 2);
+addKeys(13, row4, 3);
+addKeys(9, row5, 4);
