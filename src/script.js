@@ -212,8 +212,6 @@ class Keyboard {
     const textarea = document.createElement('textarea');
     textarea.classList.add('body--textarea', 'textarea');
     textarea.setAttribute('id', 'textarea');
-    textarea.setAttribute('rows', '5');
-    textarea.setAttribute('cols', '50');
     this.textarea = textarea;
     centralizer.appendChild(this.textarea);
     this.element = document.createElement('div');
@@ -269,11 +267,14 @@ class Keyboard {
   }
 
   removeActiveState() {
-    this.current.element &&
-      (this.previous.element &&
-        this.previous.element.classList.contains('active') &&
-        (['CapsLock', 'ShiftLeft', 'ShiftRight'].includes(this.previous.code) || this.previous.element.classList.remove('active')),
-      this.current.element.classList.remove('active'));
+    if (this.current.element) {
+      if (this.previous.element && this.previous.element.classList.contains('active')) {
+        if (!['CapsLock', 'ShiftLeft', 'ShiftRight'].includes(this.previous.code)) {
+          this.previous.element.classList.remove('active');
+        }
+      }
+      this.current.element.classList.remove('active');
+    }
   }
 
   toggleCase() {
@@ -289,28 +290,38 @@ class Keyboard {
         elenement[s].querySelectorAll('span')[2].classList.add('hidden');
       }
       if (!elenement[s].querySelectorAll('span')[3].classList.contains('hidden')) {
-        elenement[s].querySelectorAll('span')[4].classList.add('hidden');
+        elenement[s].querySelectorAll('span')[3].classList.add('hidden');
       }
-      (this.state.isShiftLeftPressed || this.state.isShiftRightPressed) && this.state.isCapsLockPressed
-        ? (elenement[s].querySelectorAll('span')[3].classList.remove('hidden'), (this.state.case = 'shiftCaps'))
-        : this.state.isCapsLockPressed
-        ? (elenement[s].querySelectorAll('span')[2].classList.remove('hidden'), (this.state.case = 'caps'))
-        : this.state.isShiftLeftPressed || this.state.isShiftRightPressed
-        ? (elenement[s].querySelectorAll('span')[1].classList.remove('hidden'), (this.state.case = 'caseUp'))
-        : (elenement[s].querySelectorAll('span')[0].classList.remove('hidden'), (this.state.case = 'caseDown'));
+
+      if (this.state.isShiftLeftPressed || this.state.isShiftRightPressed) {
+        if (this.state.isCapsLockPressed) {
+          elenement[s].querySelectorAll('span')[3].classList.remove('hidden');
+          this.state.case = 'shiftCaps';
+        } else {
+          elenement[s].querySelectorAll('span')[1].classList.remove('hidden');
+          this.state.case = 'caseUp';
+        }
+      } else if (this.state.isCapsLockPressed) {
+        elenement[s].querySelectorAll('span')[2].classList.remove('hidden');
+        this.state.case = 'caps';
+      } else {
+        elenement[s].querySelectorAll('span')[0].classList.remove('hidden');
+        this.state.case = 'caseDown';
+      }
     }
   }
 
   toggleLang() {
-    const toggleLangClass = function () {
+    const toggleLangClass = () => {
       const e = this.element.querySelectorAll(`div>.${this.state.lang}`);
       for (let s = 0; s < e.length; s += 1) {
         e[s].classList.toggle('hidden');
         e[s].querySelectorAll(`span.${this.state.case}`)[0].classList.toggle('hidden');
       }
-    }.bind(this);
+    };
 
     toggleLangClass();
+
     if (this.state.lang === 'eng') {
       this.state.lang = 'rus';
     } else {
@@ -323,7 +334,7 @@ class Keyboard {
   implementKeyFunction() {
     let e = this.textarea.value;
     const s = this.textarea.selectionStart;
-    const writeText = function () {
+    const writeText = () => {
       if (s >= 0 && s <= e.length) {
         this.textarea.value = e.slice(0, s) + this.current.char + e.slice(s, e.length);
         this.textarea.selectionStart = s + this.current.char.length;
@@ -331,7 +342,7 @@ class Keyboard {
       } else {
         this.textarea.value += this.current.char;
       }
-    }.bind(this);
+    };
 
     if (c.SPECIALS.includes(this.current.code)) {
       switch (this.current.code) {
@@ -353,11 +364,11 @@ class Keyboard {
           break;
         case 'Tab':
           this.current.char = '    ';
-          a();
+          writeText();
           break;
         case 'Enter':
           this.current.char = '\n';
-          a();
+          writeText();
           break;
         case 'CapsLock':
           if (this.state.isCapsLockPressed && !this.current.event.repeat) {
@@ -375,7 +386,6 @@ class Keyboard {
             this.state.isShiftLeftPressed = true;
             this.toggleCase();
           }
-
           break;
         case 'ShiftRight':
           if (!this.state.isShiftRightPressed || !this.state.isShiftLeftPressed) {
@@ -385,13 +395,12 @@ class Keyboard {
           }
           break;
         default:
-          console.log('Unexpected case in implementKeyFunction');
+          if (this.current.event.ctrlKey && this.current.event.altKey) {
+            this.toggleLang();
+          }
       }
     } else {
       writeText();
-      if (this.current.event.ctrlKey && this.current.event.altKey) {
-        this.toggleLang();
-      }
     }
   }
 
@@ -405,35 +414,45 @@ class Keyboard {
       this.implementKeyFunction();
       if (this.current.code === 'MetaLeft') {
         this.addActiveState();
-        setTimeout(this.removeActiveState.bind(this), 300);
-      } else {
-        ['CapsLock', 'ShiftLeft', 'ShiftRight'].includes(this.current.code) || this.addActiveState();
+        setTimeout(() => {
+          this.removeActiveState();
+        }, 300);
+      } else if (!['CapsLock', 'ShiftLeft', 'ShiftRight'].includes(this.current.code)) {
+        this.addActiveState();
       }
     }
   }
 
   keyUpHandler(e) {
-    const s = this.element.getElementsByClassName(e.code)[0];
-    s &&
-      ((this.current.element = s.closest('div')),
-      'CapsLock' !== e.code && this.removeActiveState(),
-      ('ShiftLeft' !== e.code && 'ShiftRight' !== e.code) ||
-        ('ShiftLeft' === e.code
-          ? ((this.state.isShiftLeftPressed = !1), this.removeActiveState())
-          : 'ShiftRight' === e.code && ((this.state.isShiftRightPressed = !1), this.removeActiveState()),
-        this.toggleCase()));
+    const key = this.element.getElementsByClassName(e.code)[0];
+    if (key) {
+      this.current.element = key.closest('div');
+      if (e.code !== 'CapsLock') {
+        this.removeActiveState();
+      }
+      if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+        this.state.isShiftLeftPressed = e.code === 'ShiftLeft' ? false : this.state.isShiftLeftPressed;
+        this.state.isShiftRightPressed = e.code === 'ShiftRight' ? false : this.state.isShiftRightPressed;
+        this.removeActiveState();
+        this.toggleCase();
+      }
+    }
   }
 
   mouseDownHandler(e) {
-    'SPAN' === e.target.tagName &&
-      ((this.current.event = e),
-      (this.current.element = e.target.closest('div')),
-      ([, , this.current.code] = this.current.element.classList),
-      (this.current.char = e.target.textContent),
-      this.implementKeyFunction(),
-      'CapsLock' !== this.current.code && this.addActiveState(),
-      (this.previous = { ...this.current }),
-      e.preventDefault());
+    if (e.target.tagName === 'SPAN') {
+      this.current.event = e;
+      this.current.element = e.target.closest('div');
+      [, , this.current.code] = this.current.element.classList;
+
+      this.current.char = e.target.textContent;
+      this.implementKeyFunction();
+      if (this.current.code !== 'CapsLock') {
+        this.addActiveState();
+      }
+      this.previous = { ...this.current };
+      e.preventDefault();
+    }
   }
 
   mouseUpHandler(e) {
