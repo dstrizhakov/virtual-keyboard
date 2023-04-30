@@ -1,69 +1,199 @@
-const t = [
+const KEYS = [
   [
     {
       className: 'Backquote',
-      eng: { caps: '`', caseDown: '`', caseUp: '~', shiftCaps: '~' },
-      rus: { caps: 'Ё', caseDown: 'ё', caseUp: 'Ё', shiftCaps: 'ё' },
+      eng: {
+        caps: '`',
+        caseDown: '`',
+        caseUp: '~',
+        shiftCaps: '~',
+      },
+      rus: {
+        caps: 'Ё',
+        caseDown: 'ё',
+        caseUp: 'Ё',
+        shiftCaps: 'ё',
+      },
     },
     {
       className: 'Digit1',
-      eng: { caps: '1', caseDown: '1', caseUp: '!', shiftCaps: '!' },
-      rus: { caps: '1', caseDown: '1', caseUp: '!', shiftCaps: '!' },
+      eng: {
+        caps: '1',
+        caseDown: '1',
+        caseUp: '!',
+        shiftCaps: '!',
+      },
+      rus: {
+        caps: '1',
+        caseDown: '1',
+        caseUp: '!',
+        shiftCaps: '!',
+      },
     },
     {
       className: 'Digit2',
-      eng: { caps: '2', caseDown: '2', caseUp: '@', shiftCaps: '@' },
-      rus: { caps: '2', caseDown: '2', caseUp: '"', shiftCaps: '"' },
+      eng: {
+        caps: '2',
+        caseDown: '2',
+        caseUp: '@',
+        shiftCaps: '@',
+      },
+      rus: {
+        caps: '2',
+        caseDown: '2',
+        caseUp: '"',
+        shiftCaps: '"',
+      },
     },
     {
       className: 'Digit3',
-      eng: { caps: '3', caseDown: '3', caseUp: '#', shiftCaps: '#' },
-      rus: { caps: '3', caseDown: '3', caseUp: '№', shiftCaps: '№' },
+      eng: {
+        caps: '3',
+        caseDown: '3',
+        caseUp: '#',
+        shiftCaps: '#',
+      },
+      rus: {
+        caps: '3',
+        caseDown: '3',
+        caseUp: '№',
+        shiftCaps: '№',
+      },
     },
     {
       className: 'Digit4',
-      eng: { caps: '4', caseDown: '4', caseUp: '$', shiftCaps: '$' },
-      rus: { caps: '4', caseDown: '4', caseUp: ';', shiftCaps: ';' },
+      eng: {
+        caps: '4',
+        caseDown: '4',
+        caseUp: '$',
+        shiftCaps: '$',
+      },
+      rus: {
+        caps: '4',
+        caseDown: '4',
+        caseUp: ';',
+        shiftCaps: ';',
+      },
     },
     {
       className: 'Digit5',
-      eng: { caps: '5', caseDown: '5', caseUp: '%', shiftCaps: '%' },
-      rus: { caps: '5', caseDown: '5', caseUp: '%', shiftCaps: '%' },
+      eng: {
+        caps: '5',
+        caseDown: '5',
+        caseUp: '%',
+        shiftCaps: '%',
+      },
+      rus: {
+        caps: '5',
+        caseDown: '5',
+        caseUp: '%',
+        shiftCaps: '%',
+      },
     },
     {
       className: 'Digit6',
-      eng: { caps: '6', caseDown: '6', caseUp: '^', shiftCaps: '^' },
-      rus: { caps: '6', caseDown: '6', caseUp: ':', shiftCaps: ':' },
+      eng: {
+        caps: '6',
+        caseDown: '6',
+        caseUp: '^',
+        shiftCaps: '^',
+      },
+      rus: {
+        caps: '6',
+        caseDown: '6',
+        caseUp: ':',
+        shiftCaps: ':',
+      },
     },
     {
       className: 'Digit7',
-      eng: { caps: '7', caseDown: '7', caseUp: '&', shiftCaps: '&' },
-      rus: { caps: '7', caseDown: '7', caseUp: '?', shiftCaps: '?' },
+      eng: {
+        caps: '7',
+        caseDown: '7',
+        caseUp: '&',
+        shiftCaps: '&',
+      },
+      rus: {
+        caps: '7',
+        caseDown: '7',
+        caseUp: '?',
+        shiftCaps: '?',
+      },
     },
     {
       className: 'Digit8',
-      eng: { caps: '8', caseDown: '8', caseUp: '*', shiftCaps: '*' },
-      rus: { caps: '8', caseDown: '8', caseUp: '*', shiftCaps: '*' },
+      eng: {
+        caps: '8',
+        caseDown: '8',
+        caseUp: '*',
+        shiftCaps: '*',
+      },
+      rus: {
+        caps: '8',
+        caseDown: '8',
+        caseUp: '*',
+        shiftCaps: '*',
+      },
     },
     {
       className: 'Digit9',
-      eng: { caps: '9', caseDown: '9', caseUp: '(', shiftCaps: '(' },
-      rus: { caps: '9', caseDown: '9', caseUp: '(', shiftCaps: '(' },
+      eng: {
+        caps: '9',
+        caseDown: '9',
+        caseUp: '(',
+        shiftCaps: '(',
+      },
+      rus: {
+        caps: '9',
+        caseDown: '9',
+        caseUp: '(',
+        shiftCaps: '(',
+      },
     },
     {
       className: 'Digit0',
-      eng: { caps: '0', caseDown: '0', caseUp: ')', shiftCaps: ')' },
-      rus: { caps: '0', caseDown: '0', caseUp: ')', shiftCaps: ')' },
+      eng: {
+        caps: '0',
+        caseDown: '0',
+        caseUp: ')',
+        shiftCaps: ')',
+      },
+      rus: {
+        caps: '0',
+        caseDown: '0',
+        caseUp: ')',
+        shiftCaps: ')',
+      },
     },
     {
       className: 'Minus',
-      eng: { caps: '-', caseDown: '-', caseUp: '_', shiftCaps: '_' },
-      rus: { caps: '-', caseDown: '-', caseUp: '_', shiftCaps: '_' },
+      eng: {
+        caps: '-',
+        caseDown: '-',
+        caseUp: '_',
+        shiftCaps: '_',
+      },
+      rus: {
+        caps: '-',
+        caseDown: '-',
+        caseUp: '_',
+        shiftCaps: '_',
+      },
     },
     {
       className: 'Equal',
-      eng: { caps: '=', caseDown: '=', caseUp: '+', shiftCaps: '+' },
-      rus: { caps: '=', caseDown: '=', caseUp: '+', shiftCaps: '+' },
+      eng: {
+        caps: '=',
+        caseDown: '=',
+        caseUp: '+',
+        shiftCaps: '+',
+      },
+      rus: {
+        caps: '=',
+        caseDown: '=',
+        caseUp: '+',
+        shiftCaps: '+',
+      },
     },
     { className: 'Backspace', eng: { caseDown: 'Backspace', caseUp: 'Backspace' }, rus: { caseDown: 'Backspace', caseUp: 'Backspace' } },
   ],
@@ -81,18 +211,48 @@ const t = [
     { className: 'KeyP', eng: { caseDown: 'p', caseUp: 'P' }, rus: { caseDown: 'з', caseUp: 'З' } },
     {
       className: 'BracketLeft',
-      eng: { caps: '[', caseDown: '[', caseUp: '{', shiftCaps: '{' },
-      rus: { caps: 'Х', caseDown: 'х', caseUp: 'Х', shiftCaps: 'х' },
+      eng: {
+        caps: '[',
+        caseDown: '[',
+        caseUp: '{',
+        shiftCaps: '{',
+      },
+      rus: {
+        caps: 'Х',
+        caseDown: 'х',
+        caseUp: 'Х',
+        shiftCaps: 'х',
+      },
     },
     {
       className: 'BracketRight',
-      eng: { caps: ']', caseDown: ']', caseUp: '}', shiftCaps: '}' },
-      rus: { caps: 'Ъ', caseDown: 'ъ', caseUp: 'Ъ', shiftCaps: 'ъ' },
+      eng: {
+        caps: ']',
+        caseDown: ']',
+        caseUp: '}',
+        shiftCaps: '}',
+      },
+      rus: {
+        caps: 'Ъ',
+        caseDown: 'ъ',
+        caseUp: 'Ъ',
+        shiftCaps: 'ъ',
+      },
     },
     {
       className: 'Backslash',
-      eng: { caps: '\\', caseDown: '\\', caseUp: '|', shiftCaps: '|' },
-      rus: { caps: '\\', caseDown: '\\', caseUp: '/', shiftCaps: '/' },
+      eng: {
+        caps: '\\',
+        caseDown: '\\',
+        caseUp: '|',
+        shiftCaps: '|',
+      },
+      rus: {
+        caps: '\\',
+        caseDown: '\\',
+        caseUp: '/',
+        shiftCaps: '/',
+      },
     },
     { className: 'Delete', eng: { caseDown: 'Del', caseUp: 'Del' }, rus: { caseDown: 'Del', caseUp: 'Del' } },
   ],
@@ -109,13 +269,33 @@ const t = [
     { className: 'KeyL', eng: { caseDown: 'l', caseUp: 'L' }, rus: { caseDown: 'д', caseUp: 'Д' } },
     {
       className: 'Semicolon',
-      eng: { caps: ';', caseDown: ';', caseUp: ':', shiftCaps: ':' },
-      rus: { caps: 'Ж', caseDown: 'ж', caseUp: 'Ж', shiftCaps: 'ж' },
+      eng: {
+        caps: ';',
+        caseDown: ';',
+        caseUp: ':',
+        shiftCaps: ':',
+      },
+      rus: {
+        caps: 'Ж',
+        caseDown: 'ж',
+        caseUp: 'Ж',
+        shiftCaps: 'ж',
+      },
     },
     {
       className: 'Quote',
-      eng: { caps: "'", caseDown: "'", caseUp: '"', shiftCaps: '"' },
-      rus: { caps: 'Э', caseDown: 'э', caseUp: 'Э', shiftCaps: 'э' },
+      eng: {
+        caps: "'",
+        caseDown: "'",
+        caseUp: '"',
+        shiftCaps: '"',
+      },
+      rus: {
+        caps: 'Э',
+        caseDown: 'э',
+        caseUp: 'Э',
+        shiftCaps: 'э',
+      },
     },
     { className: 'Enter', eng: { caseDown: 'Enter', caseUp: 'Enter' }, rus: { caseDown: 'Enter', caseUp: 'Enter' } },
   ],
@@ -130,18 +310,48 @@ const t = [
     { className: 'KeyM', eng: { caseDown: 'm', caseUp: 'M' }, rus: { caseDown: 'ь', caseUp: 'Ь' } },
     {
       className: 'Comma',
-      eng: { caps: ',', caseDown: ',', caseUp: '<', shiftCaps: '<' },
-      rus: { caps: 'Б', caseDown: 'б', caseUp: 'Б', shiftCaps: 'б' },
+      eng: {
+        caps: ',',
+        caseDown: ',',
+        caseUp: '<',
+        shiftCaps: '<',
+      },
+      rus: {
+        caps: 'Б',
+        caseDown: 'б',
+        caseUp: 'Б',
+        shiftCaps: 'б',
+      },
     },
     {
       className: 'Period',
-      eng: { caps: '.', caseDown: '.', caseUp: '>', shiftCaps: '>' },
-      rus: { caps: 'Ю', caseDown: 'ю', caseUp: 'Ю', shiftCaps: 'ю' },
+      eng: {
+        caps: '.',
+        caseDown: '.',
+        caseUp: '>',
+        shiftCaps: '>',
+      },
+      rus: {
+        caps: 'Ю',
+        caseDown: 'ю',
+        caseUp: 'Ю',
+        shiftCaps: 'ю',
+      },
     },
     {
       className: 'Slash',
-      eng: { caps: '/', caseDown: '/', caseUp: '?', shiftCaps: '?' },
-      rus: { caps: '.', caseDown: '.', caseUp: ',', shiftCaps: ',' },
+      eng: {
+        caps: '/',
+        caseDown: '/',
+        caseUp: '?',
+        shiftCaps: '?',
+      },
+      rus: {
+        caps: '.',
+        caseDown: '.',
+        caseUp: ',',
+        shiftCaps: ',',
+      },
     },
     { className: 'ArrowUp', eng: { caseDown: '▲', caseUp: '▲' }, rus: { caseDown: '▲', caseUp: '▲' } },
     { className: 'ShiftRight', eng: { caseDown: 'Shift', caseUp: 'Shift' }, rus: { caseDown: 'Shift', caseUp: 'Shift' } },
@@ -158,23 +368,20 @@ const t = [
     { className: 'ControlRight', eng: { caseDown: 'Ctrl', caseUp: 'Ctrl' }, rus: { caseDown: 'Ctrl', caseUp: 'Ctrl' } },
   ],
 ];
-const c = {
-  SPECIALS: [
-    'Backspace',
-    'Tab',
-    'Enter',
-    'CapsLock',
-    'ShiftLeft',
-    'ShiftRight',
-    'AltLeft',
-    'AltRight',
-    'ControlLeft',
-    'ControlRight',
-    'MetaLeft',
-    'Delete',
-  ],
-  ROWS: t,
-};
+const SPECIALS = [
+  'Backspace',
+  'Tab',
+  'Enter',
+  'CapsLock',
+  'ShiftLeft',
+  'ShiftRight',
+  'AltLeft',
+  'AltRight',
+  'ControlLeft',
+  'ControlRight',
+  'MetaLeft',
+  'Delete',
+];
 
 class Keyboard {
   constructor() {
@@ -201,7 +408,7 @@ class Keyboard {
     };
   }
 
-  initDomStructure(e) {
+  initDomStructure(data) {
     document.body.classList.add('body');
     const centralizer = document.createElement('div');
     centralizer.classList.add('centralizer');
@@ -219,32 +426,26 @@ class Keyboard {
     this.element.setAttribute('id', 'keyboard');
     const keyboardContainer = document.createDocumentFragment();
 
-    for (let sefdsss = 0; sefdsss < e.length; sefdsss += 1) {
+    for (let row = 0; row < data.length; row += 1) {
       const keyboardRow = document.createElement('div');
       keyboardRow.classList.add('keyboard--row', 'row');
-      for (let teal = 0; teal < e[sefdsss].length; teal += 1) {
+      for (let el = 0; el < data[row].length; el += 1) {
         const key = document.createElement('div');
-        key.classList.add('keyboard--key', 'key', e[sefdsss][teal].className);
-        const nqwer = document.createElement('span');
-        nqwer.classList.add('rus', 'hidden');
-        nqwer.insertAdjacentHTML('afterBegin', `<span class="caseDown hidden">${e[sefdsss][teal].rus.caseDown}</span>`);
-        nqwer.insertAdjacentHTML('beforeEnd', `<span class="caseUp hidden">${e[sefdsss][teal].rus.caseUp}</span>`);
-        nqwer.insertAdjacentHTML('beforeEnd', `<span class="caps hidden">${e[sefdsss][teal].rus.caps || e[sefdsss][teal].rus.caseUp}</span>`);
-        nqwer.insertAdjacentHTML(
-          'beforeEnd',
-          `<span class="shiftCaps hidden">${e[sefdsss][teal].rus.shiftCaps || e[sefdsss][teal].rus.caseDown}</span>`
-        );
-        key.appendChild(nqwer);
-        const irfwer = document.createElement('span');
-        irfwer.classList.add('eng');
-        irfwer.insertAdjacentHTML('afterBegin', `<span class="caseDown">${e[sefdsss][teal].eng.caseDown}</span>`);
-        irfwer.insertAdjacentHTML('beforeEnd', `<span class="caseUp hidden">${e[sefdsss][teal].eng.caseUp}</span>`);
-        irfwer.insertAdjacentHTML('beforeEnd', `<span class="caps hidden">${e[sefdsss][teal].eng.caps || e[sefdsss][teal].eng.caseUp}</span>`);
-        irfwer.insertAdjacentHTML(
-          'beforeEnd',
-          `<span class="shiftCaps hidden">${e[sefdsss][teal].eng.shiftCaps || e[sefdsss][teal].eng.caseDown}</span>`
-        );
-        key.appendChild(irfwer);
+        key.classList.add('keyboard--key', 'key', data[row][el].className);
+        const spanRus = document.createElement('span');
+        spanRus.classList.add('rus', 'hidden');
+        spanRus.insertAdjacentHTML('afterBegin', `<span class="caseDown hidden">${data[row][el].rus.caseDown}</span>`);
+        spanRus.insertAdjacentHTML('beforeEnd', `<span class="caseUp hidden">${data[row][el].rus.caseUp}</span>`);
+        spanRus.insertAdjacentHTML('beforeEnd', `<span class="caps hidden">${data[row][el].rus.caps || data[row][el].rus.caseUp}</span>`);
+        spanRus.insertAdjacentHTML('beforeEnd', `<span class="shiftCaps hidden">${data[row][el].rus.shiftCaps || data[row][el].rus.caseDown}</span>`);
+        key.appendChild(spanRus);
+        const spanEn = document.createElement('span');
+        spanEn.classList.add('eng');
+        spanEn.insertAdjacentHTML('afterBegin', `<span class="caseDown">${data[row][el].eng.caseDown}</span>`);
+        spanEn.insertAdjacentHTML('beforeEnd', `<span class="caseUp hidden">${data[row][el].eng.caseUp}</span>`);
+        spanEn.insertAdjacentHTML('beforeEnd', `<span class="caps hidden">${data[row][el].eng.caps || data[row][el].eng.caseUp}</span>`);
+        spanEn.insertAdjacentHTML('beforeEnd', `<span class="shiftCaps hidden">${data[row][el].eng.shiftCaps || data[row][el].eng.caseDown}</span>`);
+        key.appendChild(spanEn);
         keyboardRow.appendChild(key);
       }
       keyboardContainer.appendChild(keyboardRow);
@@ -278,34 +479,34 @@ class Keyboard {
   }
 
   toggleCase() {
-    const elenement = this.element.querySelectorAll(`div>.${this.state.lang}`);
-    for (let s = 0; s < elenement.length; s += 1) {
-      if (!elenement[s].querySelectorAll('span')[0].classList.contains('hidden')) {
-        elenement[s].querySelectorAll('span')[0].classList.add('hidden');
+    const spans = this.element.querySelectorAll(`div>.${this.state.lang}`);
+    for (let i = 0; i < spans.length; i += 1) {
+      if (!spans[i].querySelectorAll('span')[0].classList.contains('hidden')) {
+        spans[i].querySelectorAll('span')[0].classList.add('hidden');
       }
-      if (!elenement[s].querySelectorAll('span')[1].classList.contains('hidden')) {
-        elenement[s].querySelectorAll('span')[1].classList.add('hidden');
+      if (!spans[i].querySelectorAll('span')[1].classList.contains('hidden')) {
+        spans[i].querySelectorAll('span')[1].classList.add('hidden');
       }
-      if (!elenement[s].querySelectorAll('span')[2].classList.contains('hidden')) {
-        elenement[s].querySelectorAll('span')[2].classList.add('hidden');
+      if (!spans[i].querySelectorAll('span')[2].classList.contains('hidden')) {
+        spans[i].querySelectorAll('span')[2].classList.add('hidden');
       }
-      if (!elenement[s].querySelectorAll('span')[3].classList.contains('hidden')) {
-        elenement[s].querySelectorAll('span')[3].classList.add('hidden');
+      if (!spans[i].querySelectorAll('span')[3].classList.contains('hidden')) {
+        spans[i].querySelectorAll('span')[3].classList.add('hidden');
       }
 
       if (this.state.isShiftLeftPressed || this.state.isShiftRightPressed) {
         if (this.state.isCapsLockPressed) {
-          elenement[s].querySelectorAll('span')[3].classList.remove('hidden');
+          spans[i].querySelectorAll('span')[3].classList.remove('hidden');
           this.state.case = 'shiftCaps';
         } else {
-          elenement[s].querySelectorAll('span')[1].classList.remove('hidden');
+          spans[i].querySelectorAll('span')[1].classList.remove('hidden');
           this.state.case = 'caseUp';
         }
       } else if (this.state.isCapsLockPressed) {
-        elenement[s].querySelectorAll('span')[2].classList.remove('hidden');
+        spans[i].querySelectorAll('span')[2].classList.remove('hidden');
         this.state.case = 'caps';
       } else {
-        elenement[s].querySelectorAll('span')[0].classList.remove('hidden');
+        spans[i].querySelectorAll('span')[0].classList.remove('hidden');
         this.state.case = 'caseDown';
       }
     }
@@ -313,10 +514,10 @@ class Keyboard {
 
   toggleLang() {
     const toggleLangClass = () => {
-      const e = this.element.querySelectorAll(`div>.${this.state.lang}`);
-      for (let s = 0; s < e.length; s += 1) {
-        e[s].classList.toggle('hidden');
-        e[s].querySelectorAll(`span.${this.state.case}`)[0].classList.toggle('hidden');
+      const spans = this.element.querySelectorAll(`div>.${this.state.lang}`);
+      for (let i = 0; i < spans.length; i += 1) {
+        spans[i].classList.toggle('hidden');
+        spans[i].querySelectorAll(`span.${this.state.case}`)[0].classList.toggle('hidden');
       }
     };
 
@@ -332,11 +533,12 @@ class Keyboard {
   }
 
   implementKeyFunction() {
-    let e = this.textarea.value;
+    let text = this.textarea.value;
     const s = this.textarea.selectionStart;
+
     const writeText = () => {
-      if (s >= 0 && s <= e.length) {
-        this.textarea.value = e.slice(0, s) + this.current.char + e.slice(s, e.length);
+      if (s >= 0 && s <= text.length) {
+        this.textarea.value = text.slice(0, s) + this.current.char + text.slice(s, text.length);
         this.textarea.selectionStart = s + this.current.char.length;
         this.textarea.selectionEnd = s + this.current.char.length;
       } else {
@@ -344,20 +546,20 @@ class Keyboard {
       }
     };
 
-    if (c.SPECIALS.includes(this.current.code)) {
+    if (SPECIALS.includes(this.current.code)) {
       switch (this.current.code) {
         case 'Backspace':
-          if (s > 0 && s <= e.length) {
-            e = e.slice(0, s - 1) + e.slice(s, e.length);
-            this.textarea.value = e;
+          if (s > 0 && s <= text.length) {
+            text = text.slice(0, s - 1) + text.slice(s, text.length);
+            this.textarea.value = text;
             this.textarea.selectionStart = s - 1;
             this.textarea.selectionEnd = s - 1;
           }
           break;
         case 'Delete':
-          if (s >= 0 && s <= e.length - 1) {
-            e = e.slice(0, s) + e.slice(s + 1, e.length);
-            this.textarea.value = e;
+          if (s >= 0 && s <= text.length - 1) {
+            text = text.slice(0, s) + text.slice(s + 1, text.length);
+            this.textarea.value = text;
             this.textarea.selectionStart = s;
             this.textarea.selectionEnd = s;
           }
@@ -482,8 +684,8 @@ class Keyboard {
     }
   }
 
-  initKeyboard(e) {
-    this.initDomStructure(e);
+  initKeyboard(data) {
+    this.initDomStructure(data);
     this.initLanguage();
     document.addEventListener('keyup', this.keyUpHandler.bind(this));
     document.addEventListener('keydown', this.keyDownHandler.bind(this));
@@ -493,4 +695,4 @@ class Keyboard {
 }
 
 const keyboard = new Keyboard();
-keyboard.initKeyboard(c.ROWS);
+keyboard.initKeyboard(KEYS);
