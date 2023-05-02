@@ -83,16 +83,13 @@ class Keyboard {
   }
 
   addActiveState() {
-    this.current.element.classList.add('active');
+    if (this.current.element) {
+      this.current.element.classList.add('active');
+    }
   }
 
   removeActiveState() {
     if (this.current.element) {
-      if (this.previous.element && this.previous.element.classList.contains('active')) {
-        if (!['CapsLock', 'ShiftLeft', 'ShiftRight'].includes(this.previous.code)) {
-          this.previous.element.classList.remove('active');
-        }
-      }
       this.current.element.classList.remove('active');
     }
   }
@@ -100,18 +97,10 @@ class Keyboard {
   toggleCase() {
     const spans = this.element.querySelectorAll(`div>.${this.state.lang}`);
     for (let i = 0; i < spans.length; i += 1) {
-      if (!spans[i].querySelectorAll('span')[0].classList.contains('hidden')) {
-        spans[i].querySelectorAll('span')[0].classList.add('hidden');
-      }
-      if (!spans[i].querySelectorAll('span')[1].classList.contains('hidden')) {
-        spans[i].querySelectorAll('span')[1].classList.add('hidden');
-      }
-      if (!spans[i].querySelectorAll('span')[2].classList.contains('hidden')) {
-        spans[i].querySelectorAll('span')[2].classList.add('hidden');
-      }
-      if (!spans[i].querySelectorAll('span')[3].classList.contains('hidden')) {
-        spans[i].querySelectorAll('span')[3].classList.add('hidden');
-      }
+      spans[i].querySelectorAll('span')[0].classList.add('hidden');
+      spans[i].querySelectorAll('span')[1].classList.add('hidden');
+      spans[i].querySelectorAll('span')[2].classList.add('hidden');
+      spans[i].querySelectorAll('span')[3].classList.add('hidden');
 
       if (this.state.isShiftLeftPressed || this.state.isShiftRightPressed) {
         if (this.state.isCapsLockPressed) {
@@ -156,6 +145,7 @@ class Keyboard {
     const s = this.textarea.selectionStart;
 
     const writeText = () => {
+      this.textarea.focus();
       if (s >= 0 && s <= text.length) {
         this.textarea.value = text.slice(0, s) + this.current.char + text.slice(s, text.length);
         this.textarea.selectionStart = s + this.current.char.length;
@@ -168,6 +158,7 @@ class Keyboard {
     if (SPECIALS.includes(this.current.code)) {
       switch (this.current.code) {
         case 'Backspace':
+          this.textarea.focus();
           if (s > 0 && s <= text.length) {
             text = text.slice(0, s - 1) + text.slice(s, text.length);
             this.textarea.value = text;
@@ -176,6 +167,7 @@ class Keyboard {
           }
           break;
         case 'Delete':
+          this.textarea.focus();
           if (s >= 0 && s <= text.length - 1) {
             text = text.slice(0, s) + text.slice(s + 1, text.length);
             this.textarea.value = text;
@@ -202,18 +194,14 @@ class Keyboard {
           this.toggleCase();
           break;
         case 'ShiftLeft':
-          if (!this.state.isShiftLeftPressed || !this.state.isShiftRightPressed) {
-            this.addActiveState();
-            this.state.isShiftLeftPressed = true;
-            this.toggleCase();
-          }
+          this.addActiveState();
+          this.state.isShiftLeftPressed = true;
+          this.toggleCase();
           break;
         case 'ShiftRight':
-          if (!this.state.isShiftRightPressed || !this.state.isShiftLeftPressed) {
-            this.addActiveState();
-            this.state.isShiftRightPressed = true;
-            this.toggleCase();
-          }
+          this.addActiveState();
+          this.state.isShiftRightPressed = true;
+          this.toggleCase();
           break;
         default:
           if (this.current.event.ctrlKey && this.current.event.altKey) {
