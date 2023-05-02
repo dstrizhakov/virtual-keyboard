@@ -7,19 +7,13 @@ class Keyboard {
     this.element = null;
     this.textarea = null;
     this.state = {
-      isShiftLeftPressed: !1,
-      isShiftRightPressed: !1,
-      isCapsLockPressed: !1,
+      isShiftLeftPressed: false,
+      isShiftRightPressed: false,
+      isCapsLockPressed: false,
       case: 'caseDown',
       lang: 'eng',
     };
     this.current = {
-      element: null,
-      code: null,
-      event: null,
-      char: null,
-    };
-    this.previous = {
       element: null,
       code: null,
       event: null,
@@ -142,14 +136,14 @@ class Keyboard {
 
   implementKeyFunction() {
     let text = this.textarea.value;
-    const s = this.textarea.selectionStart;
+    const pos = this.textarea.selectionStart;
 
     const writeText = () => {
       this.textarea.focus();
-      if (s >= 0 && s <= text.length) {
-        this.textarea.value = text.slice(0, s) + this.current.char + text.slice(s, text.length);
-        this.textarea.selectionStart = s + this.current.char.length;
-        this.textarea.selectionEnd = s + this.current.char.length;
+      if (pos >= 0 && pos <= text.length) {
+        this.textarea.value = text.slice(0, pos) + this.current.char + text.slice(pos, text.length);
+        this.textarea.selectionStart = pos + this.current.char.length;
+        this.textarea.selectionEnd = pos + this.current.char.length;
       } else {
         this.textarea.value += this.current.char;
       }
@@ -159,20 +153,20 @@ class Keyboard {
       switch (this.current.code) {
         case 'Backspace':
           this.textarea.focus();
-          if (s > 0 && s <= text.length) {
-            text = text.slice(0, s - 1) + text.slice(s, text.length);
+          if (pos > 0 && pos <= text.length) {
+            text = text.slice(0, pos - 1) + text.slice(pos, text.length);
             this.textarea.value = text;
-            this.textarea.selectionStart = s - 1;
-            this.textarea.selectionEnd = s - 1;
+            this.textarea.selectionStart = pos - 1;
+            this.textarea.selectionEnd = pos - 1;
           }
           break;
         case 'Delete':
           this.textarea.focus();
-          if (s >= 0 && s <= text.length - 1) {
-            text = text.slice(0, s) + text.slice(s + 1, text.length);
+          if (pos >= 0 && pos <= text.length - 1) {
+            text = text.slice(0, pos) + text.slice(pos + 1, text.length);
             this.textarea.value = text;
-            this.textarea.selectionStart = s;
-            this.textarea.selectionEnd = s;
+            this.textarea.selectionStart = pos;
+            this.textarea.selectionEnd = pos;
           }
           break;
         case 'Tab':
@@ -253,13 +247,11 @@ class Keyboard {
       this.current.event = e;
       this.current.element = e.target.closest('div');
       [, , this.current.code] = this.current.element.classList;
-
       this.current.char = e.target.textContent;
       this.implementKeyFunction();
       if (this.current.code !== 'CapsLock') {
         this.addActiveState();
       }
-      this.previous = { ...this.current };
       e.preventDefault();
     }
   }
@@ -269,8 +261,6 @@ class Keyboard {
     this.current.element = e.target.closest('div');
     if (this.current.element && this.current.element.classList.contains('key')) {
       [, , this.current.code] = this.current.element.classList;
-    } else {
-      this.current = { ...this.previous };
     }
     if (this.current.code !== 'CapsLock') {
       this.removeActiveState();
@@ -297,7 +287,7 @@ class Keyboard {
     document.addEventListener('keyup', this.keyUpHandler.bind(this));
     document.addEventListener('keydown', this.keyDownHandler.bind(this));
     document.addEventListener('mouseup', this.mouseUpHandler.bind(this));
-    this.element.addEventListener('mousedown', this.mouseDownHandler.bind(this));
+    document.addEventListener('mousedown', this.mouseDownHandler.bind(this));
   }
 }
 
